@@ -1,15 +1,20 @@
 package ru.pkozlov.app.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pkozlov.app.dao.repository.UserRepository;
 import ru.pkozlov.app.service.dto.PatchEmailDto;
 import ru.pkozlov.app.service.dto.PatchPhoneDto;
+import ru.pkozlov.app.service.dto.SearchRequestDto;
 import ru.pkozlov.app.service.dto.UserDto;
 import ru.pkozlov.app.service.exception.NotFoundException;
 import ru.pkozlov.app.service.exception.ValidationException;
 import ru.pkozlov.app.service.mapper.UserMapper;
+
+import static ru.pkozlov.app.dao.repository.UserRepository.Specs.*;
 
 @Service
 @RequiredArgsConstructor
@@ -108,5 +113,16 @@ public class UserService {
                 );
 
         return UserMapper.asDto(user);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserDto> searchUsers(SearchRequestDto searchRequest, Pageable pageable) {
+        return userRepository.findAll(
+                byDateOfBirth(searchRequest.getDateOfBirth())
+                        .and(byPhone(searchRequest.getPhone()))
+                        .and(byName(searchRequest.getName()))
+                        .and(byEmail(searchRequest.getEmail())),
+                pageable
+        ).map(UserMapper::asDto);
     }
 }
