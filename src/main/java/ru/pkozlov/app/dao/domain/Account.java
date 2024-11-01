@@ -11,7 +11,10 @@ import java.math.BigDecimal;
 @Builder
 @Getter
 @Setter
-@Table(name = "account")
+@Table(
+        name = "account",
+        indexes = { @Index(name = "account_user_id_idx", columnList = "user_id") }
+)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")

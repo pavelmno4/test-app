@@ -10,7 +10,10 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-@Table(name = "email_data")
+@Table(
+        name = "email_data",
+        indexes = { @Index(name = "email_data_user_id_idx", columnList = "user_id") }
+)
 public class EmailData {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "email_data_seq")
