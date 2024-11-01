@@ -1,7 +1,7 @@
 package ru.pkozlov.app.dao.domain;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,10 +9,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Builder
 @Getter
 @Setter
 @Table(name = "usr")
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usr_seq")

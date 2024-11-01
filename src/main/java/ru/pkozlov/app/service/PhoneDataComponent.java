@@ -20,9 +20,11 @@ public class PhoneDataComponent {
         if (phoneData.isPresent()) {
             throw new ValidationException("Phone already exists");
         } else {
-            return PhoneData.builder()
-                    .phone(patchPhone.getPhone())
-                    .build();
+            return phoneDataRepository.save(
+                    PhoneData.builder()
+                            .phone(patchPhone.getPhone())
+                            .build()
+            );
         }
     }
 
@@ -33,6 +35,7 @@ public class PhoneDataComponent {
                 .ifPresent(email -> { throw new ValidationException("Phone already exists"); });
 
         phoneData.setPhone(patchPhone.getPhone());
+        phoneDataRepository.save(phoneData);
         return phoneData;
     }
 

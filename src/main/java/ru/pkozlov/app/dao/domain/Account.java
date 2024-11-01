@@ -1,20 +1,20 @@
 package ru.pkozlov.app.dao.domain;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Builder
 @Getter
 @Setter
 @Table(
         name = "account",
         indexes = { @Index(name = "account_user_id_idx", columnList = "user_id") }
 )
+@NoArgsConstructor
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")

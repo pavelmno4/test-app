@@ -55,14 +55,13 @@ public class UserService {
 
         if (user.getEmails().size() == 1) throw new ValidationException("User must have as least 1 email");
 
-        user.getEmails().stream()
+        var emailDataForDelete = user.getEmails().stream()
                 .filter(emailData -> emailData.getId().equals(emailDataId))
                 .findFirst()
-                .ifPresentOrElse(
-                        emailDataComponent::deleteEmail,
-                        () -> { throw new NotFoundException(String.format("EmailData with id %d not found for User %d", emailDataId, userId)); }
-                );
+                .orElseThrow(() -> new NotFoundException(String.format("EmailData with id %d not found for User %d", emailDataId, userId)));
 
+        emailDataComponent.deleteEmail(emailDataForDelete);
+        user.getEmails().remove(emailDataForDelete);
         return UserMapper.asDto(user);
     }
 
@@ -101,14 +100,13 @@ public class UserService {
 
         if (user.getPhones().size() == 1) throw new ValidationException("User must have as least 1 phone");
 
-        user.getPhones().stream()
+        var phoneDataForDelete = user.getPhones().stream()
                 .filter(phoneData -> phoneData.getId().equals(phoneDataId))
                 .findFirst()
-                .ifPresentOrElse(
-                        phoneDataComponent::deletePhone,
-                        () -> { throw new NotFoundException(String.format("PhoneData with id %d not found for User %d", phoneDataId, userId)); }
-                );
+                .orElseThrow(() -> new NotFoundException(String.format("PhoneData with id %d not found for User %d", phoneDataId, userId)));
 
+        phoneDataComponent.deletePhone(phoneDataForDelete);
+        user.getPhones().remove(phoneDataForDelete);
         return UserMapper.asDto(user);
     }
 

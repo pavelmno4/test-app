@@ -20,9 +20,11 @@ public class EmailDataComponent {
         if (emailData.isPresent()) {
             throw new ValidationException("Email already exists");
         } else {
-            return EmailData.builder()
-                    .email(patchEmail.getEmail())
-                    .build();
+            return emailDataRepository.save(
+                    EmailData.builder()
+                            .email(patchEmail.getEmail())
+                            .build()
+            );
         }
     }
 
@@ -33,6 +35,7 @@ public class EmailDataComponent {
                 .ifPresent(email -> { throw new ValidationException("Email already exists"); });
 
         emailData.setEmail(patchEmail.getEmail());
+        emailDataRepository.save(emailData);
         return emailData;
     }
 

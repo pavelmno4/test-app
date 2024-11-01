@@ -1,8 +1,6 @@
 package ru.pkozlov.app.dao.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,6 +12,8 @@ import javax.persistence.*;
         name = "email_data",
         indexes = { @Index(name = "email_data_user_id_idx", columnList = "user_id") }
 )
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmailData {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "email_data_seq")
