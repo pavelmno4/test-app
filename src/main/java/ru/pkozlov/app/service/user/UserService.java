@@ -3,7 +3,9 @@ package ru.pkozlov.app.service.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.pkozlov.app.dao.domain.User;
 import ru.pkozlov.app.dao.repository.UserRepository;
 import ru.pkozlov.app.service.exception.NotFoundException;
 import ru.pkozlov.app.service.exception.ValidationException;
@@ -11,12 +13,15 @@ import ru.pkozlov.app.service.user.dto.*;
 import ru.pkozlov.app.service.user.mapper.SearchResponseMapper;
 import ru.pkozlov.app.service.user.mapper.UserMapper;
 
+import java.math.BigDecimal;
+
 import static ru.pkozlov.app.dao.repository.UserRepository.Specs.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final AccountComponent accountComponent;
     private final EmailDataComponent emailDataComponent;
     private final PhoneDataComponent phoneDataComponent;
 
@@ -108,6 +113,20 @@ public class UserService {
         phoneDataComponent.deletePhone(phoneDataForDelete);
         user.getPhones().remove(phoneDataForDelete);
         return UserMapper.asDto(user);
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public UserDto transferMoney(Long senderUserId, Long receiverUserId, BigDecimal amount) {
+        var sender = userRepository.findById(senderUserId)
+                .orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", senderUserId)));
+        var senderAccount = sender.getAccount();
+
+        var receiverAccount = userRepository.findById(receiverUserId)
+                .map(User::getAccount)
+                .orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", receiverUserId)));
+
+        accountComponent.transferMoney(senderAccount, receiverAccount, amount);
+        return UserMapper.asDto(sender);
     }
 
     @Transactional(readOnly = true)

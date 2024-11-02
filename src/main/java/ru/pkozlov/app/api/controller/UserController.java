@@ -3,7 +3,10 @@ package ru.pkozlov.app.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import ru.pkozlov.app.api.dto.MoneyTransferRequest;
+import ru.pkozlov.app.service.security.dto.AuthUserDetails;
 import ru.pkozlov.app.service.user.UserService;
 import ru.pkozlov.app.service.user.dto.*;
 
@@ -18,6 +21,18 @@ public class UserController {
             SearchRequestDto searchRequest
     ) {
         return userService.searchUsers(searchRequest, pageable);
+    }
+
+    @PostMapping("/v1/user/{userId}/transfer-money")
+    public UserDto transferMoney(
+            @AuthenticationPrincipal AuthUserDetails sender,
+            @RequestBody MoneyTransferRequest moneyTransferRequest
+    ) {
+        return userService.transferMoney(
+                sender.getId(),
+                moneyTransferRequest.getReceiverUserId(),
+                moneyTransferRequest.getAmount()
+        );
     }
 
     @PostMapping("/v1/user/{userId}/email")
