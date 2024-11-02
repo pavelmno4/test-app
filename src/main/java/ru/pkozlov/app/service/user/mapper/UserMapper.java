@@ -11,6 +11,7 @@ public class UserMapper {
                 .id(user.getId())
                 .name(user.getName())
                 .dateOfBirth(user.getDateOfBirth())
+                .password(user.getPassword())
                 .account(AccountMapper.asDto(user.getAccount()))
                 .emails(
                         user.getEmails().stream()

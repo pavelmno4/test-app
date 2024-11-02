@@ -5,3 +5,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/app
     username: test
     password: test
+
+security:
+  secret-key: bXlzdXBlcnNlY3JldGtleWZvcmp3dHRoYXRpY29tcG9zZWlubXloZWFk

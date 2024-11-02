@@ -5,9 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pkozlov.app.dao.repository.UserRepository;
-import ru.pkozlov.app.service.user.dto.*;
 import ru.pkozlov.app.service.exception.NotFoundException;
 import ru.pkozlov.app.service.exception.ValidationException;
+import ru.pkozlov.app.service.user.dto.*;
 import ru.pkozlov.app.service.user.mapper.SearchResponseMapper;
 import ru.pkozlov.app.service.user.mapper.UserMapper;
 
@@ -120,5 +120,21 @@ public class UserService {
                 pageable
         );
         return SearchResponseMapper.asDto(users);
+    }
+
+    @Transactional(readOnly = true)
+    public UserDto findByUsername(String username) {
+        return userRepository
+                .findOne(byName(username))
+                .map(UserMapper::asDto)
+                .orElseThrow(() -> new NotFoundException(String.format("User with name %s not found", username)));
+    }
+
+    @Transactional(readOnly = true)
+    public UserDto findByEmail(String email) {
+        return userRepository
+                .findOne(byEmail(email))
+                .map(UserMapper::asDto)
+                .orElseThrow(() -> new NotFoundException(String.format("User with email %s not found", email)));
     }
 }
