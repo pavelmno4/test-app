@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.pkozlov.app.dao.domain.PhoneData;
 import ru.pkozlov.app.dao.repository.PhoneDataRepository;
 import ru.pkozlov.app.service.user.dto.PatchPhoneDto;
-import ru.pkozlov.app.service.user.exception.ValidationException;
+import ru.pkozlov.app.service.exception.ValidationException;
 
 @Component
 @RequiredArgsConstructor

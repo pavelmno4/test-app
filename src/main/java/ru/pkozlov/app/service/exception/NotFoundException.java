@@ -1,4 +1,4 @@
-package ru.pkozlov.app.service.user.exception;
+package ru.pkozlov.app.service.exception;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

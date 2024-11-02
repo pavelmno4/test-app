@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.pkozlov.app.dao.domain.EmailData;
 import ru.pkozlov.app.dao.repository.EmailDataRepository;
 import ru.pkozlov.app.service.user.dto.PatchEmailDto;
-import ru.pkozlov.app.service.user.exception.ValidationException;
+import ru.pkozlov.app.service.exception.ValidationException;
 
 @Component
 @RequiredArgsConstructor
