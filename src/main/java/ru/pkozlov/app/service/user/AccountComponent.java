@@ -41,6 +41,10 @@ public class AccountComponent {
                 .peek(account -> {
                     var balanceUpperLimit = account.getBalanceUpperLimit();
                     var currentBalance = account.getBalance();
+
+                    if (currentBalance.compareTo(balanceUpperLimit) > 0 || currentBalance.compareTo(balanceUpperLimit) == 0)
+                        return;
+
                     var updatedBalance = currentBalance.multiply(new BigDecimal("1.1")).setScale(2, RoundingMode.HALF_EVEN);
 
                     updatedBalance = (updatedBalance.compareTo(balanceUpperLimit) > 0) ? balanceUpperLimit : updatedBalance;
