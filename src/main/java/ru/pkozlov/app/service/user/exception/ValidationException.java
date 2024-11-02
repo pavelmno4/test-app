@@ -1,4 +1,4 @@
-package ru.pkozlov.app.service.exception;
+package ru.pkozlov.app.service.user.exception;
 
 public class ValidationException extends RuntimeException {
     public ValidationException(String message) {

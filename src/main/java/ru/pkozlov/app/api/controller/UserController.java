@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-import ru.pkozlov.app.service.UserService;
-import ru.pkozlov.app.service.dto.*;
+import ru.pkozlov.app.service.user.UserService;
+import ru.pkozlov.app.service.user.dto.*;
 
 @RestController
 @RequiredArgsConstructor

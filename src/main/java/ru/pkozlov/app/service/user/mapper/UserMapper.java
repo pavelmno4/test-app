@@ -1,7 +1,7 @@
-package ru.pkozlov.app.service.mapper;
+package ru.pkozlov.app.service.user.mapper;
 
 import ru.pkozlov.app.dao.domain.User;
-import ru.pkozlov.app.service.dto.UserDto;
+import ru.pkozlov.app.service.user.dto.UserDto;
 
 import java.util.stream.Collectors;
 

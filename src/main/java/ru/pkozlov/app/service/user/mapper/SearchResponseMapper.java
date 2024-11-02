@@ -1,8 +1,8 @@
-package ru.pkozlov.app.service.mapper;
+package ru.pkozlov.app.service.user.mapper;
 
 import org.springframework.data.domain.Page;
 import ru.pkozlov.app.dao.domain.User;
-import ru.pkozlov.app.service.dto.SearchResponseDto;
+import ru.pkozlov.app.service.user.dto.SearchResponseDto;
 
 public class SearchResponseMapper {
     public static SearchResponseDto asDto(Page<User> page) {

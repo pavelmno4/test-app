@@ -1,7 +1,7 @@
-package ru.pkozlov.app.service.mapper;
+package ru.pkozlov.app.service.user.mapper;
 
 import ru.pkozlov.app.dao.domain.Account;
-import ru.pkozlov.app.service.dto.AccountDto;
+import ru.pkozlov.app.service.user.dto.AccountDto;
 
 public class AccountMapper {
     public static AccountDto asDto(Account account) {

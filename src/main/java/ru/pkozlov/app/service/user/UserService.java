@@ -1,15 +1,15 @@
-package ru.pkozlov.app.service;
+package ru.pkozlov.app.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pkozlov.app.dao.repository.UserRepository;
-import ru.pkozlov.app.service.dto.*;
-import ru.pkozlov.app.service.exception.NotFoundException;
-import ru.pkozlov.app.service.exception.ValidationException;
-import ru.pkozlov.app.service.mapper.SearchResponseMapper;
-import ru.pkozlov.app.service.mapper.UserMapper;
+import ru.pkozlov.app.service.user.dto.*;
+import ru.pkozlov.app.service.user.exception.NotFoundException;
+import ru.pkozlov.app.service.user.exception.ValidationException;
+import ru.pkozlov.app.service.user.mapper.SearchResponseMapper;
+import ru.pkozlov.app.service.user.mapper.UserMapper;
 
 import static ru.pkozlov.app.dao.repository.UserRepository.Specs.*;
 

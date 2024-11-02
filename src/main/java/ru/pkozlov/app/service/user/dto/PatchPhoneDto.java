@@ -1,4 +1,4 @@
-package ru.pkozlov.app.service.dto;
+package ru.pkozlov.app.service.user.dto;
 
 import lombok.Data;
 

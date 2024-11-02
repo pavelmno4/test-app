@@ -1,12 +1,12 @@
-package ru.pkozlov.app.service;
+package ru.pkozlov.app.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pkozlov.app.dao.domain.PhoneData;
 import ru.pkozlov.app.dao.repository.PhoneDataRepository;
-import ru.pkozlov.app.service.dto.PatchPhoneDto;
-import ru.pkozlov.app.service.exception.ValidationException;
+import ru.pkozlov.app.service.user.dto.PatchPhoneDto;
+import ru.pkozlov.app.service.user.exception.ValidationException;
 
 @Component
 @RequiredArgsConstructor
