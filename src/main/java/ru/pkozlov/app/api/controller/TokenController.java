@@ -1,5 +1,6 @@
 package ru.pkozlov.app.api.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +10,7 @@ import ru.pkozlov.app.service.security.TokenService;
 import ru.pkozlov.app.service.security.dto.TokenRequest;
 import ru.pkozlov.app.service.security.dto.TokenResponse;
 
+@Tag(name = "Token Controller", description = "Получение jwt")
 @RestController
 @RequiredArgsConstructor
 public class TokenController {

@@ -1,6 +1,8 @@
 package ru.pkozlov.app.api.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +12,7 @@ import ru.pkozlov.app.service.security.dto.AuthUserDetails;
 import ru.pkozlov.app.service.user.UserService;
 import ru.pkozlov.app.service.user.dto.*;
 
+@Tag(name = "User Controller", description = "Ресурсы пользователя")
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -17,8 +20,8 @@ public class UserController {
 
     @GetMapping("/v1/user")
     public SearchResponseDto search(
-            @PageableDefault Pageable pageable,
-            SearchRequestDto searchRequest
+            @ParameterObject @PageableDefault Pageable pageable,
+            @ParameterObject SearchRequestDto searchRequest
     ) {
         return userService.searchUsers(searchRequest, pageable);
     }

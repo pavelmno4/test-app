@@ -8,3 +8,7 @@ spring:
 
 security:
   secret-key: bXlzdXBlcnNlY3JldGtleWZvcmp3dHRoYXRpY29tcG9zZWlubXloZWFk
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
