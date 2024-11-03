@@ -1,8 +1,6 @@
 package ru.pkozlov.app.dao.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -12,11 +10,13 @@ import java.math.RoundingMode;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(
         name = "account",
         indexes = {@Index(name = "account_user_id_idx", columnList = "user_id")}
 )
 @NoArgsConstructor
+@AllArgsConstructor
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
