@@ -16,11 +16,11 @@ public class TokenService {
     private final AuthenticationManager authenticationManager;
     private final JwtComponent jwtComponent;
 
-    public TokenResponse generateToken(TokenRequest tokenRequest, Function<String, UserDetails> userServiceFunction) {
+    public TokenResponse generateToken(TokenRequest tokenRequest, Function<String, UserDetails> loadUserByEmail) {
         var email = tokenRequest.getEmail();
         var password = tokenRequest.getPassword();
 
-        UserDetails userDetails = userServiceFunction.apply(email);
+        UserDetails userDetails = loadUserByEmail.apply(email);
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userDetails.getUsername(), password)
