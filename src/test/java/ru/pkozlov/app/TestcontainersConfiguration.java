@@ -1,18 +1,15 @@
 package ru.pkozlov.app;
 
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.context.annotation.Bean;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
-@TestConfiguration(proxyBeanMethods = false)
+@Testcontainers
 class TestcontainersConfiguration {
+    private static final String DATABASE_NAME = "test-app";
 
-	@Bean
-	@ServiceConnection
-	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
-	}
-
+    @Container
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14-alpine")
+            .withReuse(true)
+            .withDatabaseName(DATABASE_NAME);
 }
